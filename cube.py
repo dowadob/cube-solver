@@ -14,77 +14,63 @@ class cube:
         self.cube = state
     # move left to down
     def L(self):
-        # right side of back reversed which become left side in UP
-        l = []
-        l += self.cube[9*3+2:9*4:3][::-1]
-        # left side of Up which become left side in front
-        l += self.cube[0:9:3]
-        #left side of front which become  left side in Down
-        l += self.cube[9:9*2:3]
-        #left side of down reversed which become right side in back
-        l += self.cube[9*5:54:3][::-1]
+        # simpan kolom kiri Up
+        t0, t1, t2 = c[0], c[3], c[6]
 
-        #left side in up
-        for i in range(0, 9, 3):
-            self.cube[i] = l[0]
-            l.pop(0)
-        #left side of Front
-        for i in range(9, 9*2,3):
-            self.cube[i] = l[0]
-            l.pop(0)
-        #left side of Down
-        for i in range(9*5,54,3):
-            self.cube[i] = l[0]
-            l.pop(0)
-        #right side in back
-        for i in range(9*3+2,9*4, 3):
-            self.cube[i] = l[0]
-            l.pop(0)
-        
+        # Up <- Back
+        c[0], c[3], c[6] = c[35], c[32], c[29]
+
+        # Back <- Down
+        c[29], c[32], c[35] = c[51], c[48], c[45]
+
+        # Down <- Front
+        c[45], c[48], c[51] = c[9], c[12], c[15]
+
+        # Front <- Up lama
+        c[9], c[12], c[15] = t0, t1, t2
+
+        # putar face kiri
+        t = c[36:45]
+
+        c[36] = t[6]
+        c[37] = t[3]
+        c[38] = t[0]
+        c[39] = t[7]
+        c[40] = t[4]
+        c[41] = t[1]
+        c[42] = t[8]
+        c[43] = t[5]
+        c[44] = t[2]
     # move right to up
-    def R(self):
-        # right side of front which become right side in UP
-        l = []
-        l += self.cube[9+2:9*2:3]
-        # right side of Up reversed which become left side in back
-        l += self.cube[2:9:3][::-1]
-        #left side of back reversed which become  right side in Down
-        l += self.cube[9*3:9*4:3][::-1]
-        #right side of down which become right side in front
-        l += self.cube[9*5:54:3][::-1]
+def R(self):
+    # ---------- save Up right column ----------
+    t0, t1, t2 = c[2], c[5], c[8]
 
-        #left side in up
-        for i in range(0, 9, 3):
-            self.cube[i] = l[-1]
-            l.pop(-1)
-        #left side of Front
-        for i in range(9, 9*2,3):
-            self.cube[i] = l[-1]
-            l.pop(-1)
-        #left side of Down
-        for i in range(9*5,54,3):
-            self.cube[i] = l[-1]
-            l.pop(-1)
-        #right side in back
-        for i in range(9*3+2,9*4, 3):
-            self.cube[i] = l[-1]
-            l.pop(-1)
-        
+    # Up <- Front
+    c[2], c[5], c[8] = c[11], c[14], c[17]
+
+    # Front <- Down
+    c[11], c[14], c[17] = c[47], c[50], c[53]
+
+    # Down <- Back (reversed)
+    c[47], c[50], c[53] = c[33], c[30], c[27]
+
+    # Back <- old Up (reversed)
+    c[27], c[30], c[33] = t2, t1, t0
+
+    # ---------- rotate Right face clockwise ----------
+    t = c[18:27].copy()
+
+    c[18] = t[6]
+    c[19] = t[3]
+    c[20] = t[0]
+
+    c[21] = t[7]
+    c[22] = t[4]
+    c[23] = t[1]
+
+    c[24] = t[8]
+    c[25] = t[5]
+    c[26] = t[2]        
     # move up to right
     def U(self):
-        #first row of left in l[0]
-        l = []
-        l.append([col for col in self.left[0]])
-        l.append([col for col in self.front[0]])
-        l.append([col for col in self.right[0]])
-        l.append([col for col in self.back[0]])
-
-        for i in range(3):
-            self.up[i][0] = l[0][i]
-        for i in range(3):
-            self.back[i][0] = l[1][i]
-        for i in range(3):
-            self.down[i][0] = l[2][i]
-        for i in range(3):
-            self.front[i][0] = l[3][i]
-    
