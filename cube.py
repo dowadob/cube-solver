@@ -43,14 +43,14 @@ class cube:
         
     # move right to up
     def R(self):
-        # right side of front which becomeright side in UP
+        # right side of front which become right side in UP
         l = []
         l += self.cube[9+2:9*2:3]
-        # left side of Up which become left side in front
-        l += self.cube[0:9:3]
-        #left side of front which become  left side in Down
-        l += self.cube[9:9*2:3]
-        #left side of down reversed which become right side in back
+        # right side of Up reversed which become left side in back
+        l += self.cube[2:9:3][::-1]
+        #left side of back reversed which become  right side in Down
+        l += self.cube[9*3:9*4:3][::-1]
+        #right side of down which become right side in front
         l += self.cube[9*5:54:3][::-1]
 
         #left side in up
