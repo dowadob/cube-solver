@@ -14,6 +14,7 @@ class cube:
         self.cube = state
     # move left to down
     def L(self):
+        c = self.cube
         # simpan kolom kiri Up
         t0, t1, t2 = c[0], c[3], c[6]
 
@@ -42,35 +43,57 @@ class cube:
         c[43] = t[5]
         c[44] = t[2]
     # move right to up
-def R(self):
-    # ---------- save Up right column ----------
-    t0, t1, t2 = c[2], c[5], c[8]
+    def R(self):
+        c = self.cube
+        # ---------- save Up right column ----------
+        t0, t1, t2 = c[2], c[5], c[8]
 
-    # Up <- Front
-    c[2], c[5], c[8] = c[11], c[14], c[17]
+        # Up <- Front
+        c[2], c[5], c[8] = c[11], c[14], c[17]
 
-    # Front <- Down
-    c[11], c[14], c[17] = c[47], c[50], c[53]
+        # Front <- Down
+        c[11], c[14], c[17] = c[47], c[50], c[53]
 
-    # Down <- Back (reversed)
-    c[47], c[50], c[53] = c[33], c[30], c[27]
+        # Down <- Back (reversed)
+        c[47], c[50], c[53] = c[33], c[30], c[27]
 
-    # Back <- old Up (reversed)
-    c[27], c[30], c[33] = t2, t1, t0
+        # Back <- old Up (reversed)
+        c[27], c[30], c[33] = t2, t1, t0
 
-    # ---------- rotate Right face clockwise ----------
-    t = c[18:27].copy()
+        # ---------- rotate Right face clockwise ----------
+        t = c[18:27].copy()
 
-    c[18] = t[6]
-    c[19] = t[3]
-    c[20] = t[0]
+        c[18] = t[6]
+        c[19] = t[3]
+        c[20] = t[0]
 
-    c[21] = t[7]
-    c[22] = t[4]
-    c[23] = t[1]
+        c[21] = t[7]
+        c[22] = t[4]
+        c[23] = t[1]
 
-    c[24] = t[8]
-    c[25] = t[5]
-    c[26] = t[2]        
+        c[24] = t[8]
+        c[25] = t[5]
+        c[26] = t[2]        
     # move up to right
     def U(self):
+        c = self.cube
+        #takes front top row
+        t0, t1, t2 = c[9], c[10], c[11]
+        #modify the front up row
+        c[9], c[10], c[11] = c[9*4], c[9*4+1], c[9*4+2]
+        #modify the left up row
+        c[9*4], c[9*4+1], c[9*4+2] = c[9*3], c[9*3+1], c[9*3+2]
+        #modify the back up row
+        c[9*3], c[9*3+1], c[9*3+2] =c[9*2], c[9*2+1], c[9*3+1]
+        #modify right up row
+        c[9*2], c[9*2+1], c[9*3+1] = t0, t1, t2
+        #modify the up face
+        t0 = c[0]
+        c[0] = c[2]
+        c[2]=c[8]
+        c[8]=c[6]
+        t = c[1]
+        c[1]=c[5]
+        c[5]=c[7]
+        c[7]=c[3]
+        c[3]=t0
