@@ -9,7 +9,7 @@ for j in range(6):
     print(f"face: {j}")
     for i in range(9*j, 9*(j+1), 3):
         print("".join([str(c) for c in x.cube[i:i+3]]))
-x.L()
+x.F()
 for j in range(6):
     print(f"face: {j}")
     for i in range(9*j, 9*(j+1), 3):

@@ -84,16 +84,41 @@ class cube:
         #modify the left up row
         c[9*4], c[9*4+1], c[9*4+2] = c[9*3], c[9*3+1], c[9*3+2]
         #modify the back up row
-        c[9*3], c[9*3+1], c[9*3+2] =c[9*2], c[9*2+1], c[9*3+1]
+        c[9*3], c[9*3+1], c[9*3+2] =c[9*2], c[9*2+1], c[9*2+2]
         #modify right up row
-        c[9*2], c[9*2+1], c[9*3+1] = t0, t1, t2
+        c[9*2], c[9*2+1], c[9*2+2] = t0, t1, t2
         #modify the up face
         t0 = c[0]
         c[0] = c[2]
         c[2]=c[8]
         c[8]=c[6]
-        t = c[1]
+        c[6] = t0
+        t0 = c[1]
         c[1]=c[5]
         c[5]=c[7]
         c[7]=c[3]
         c[3]=t0
+    #move front clockwise
+    def F(self):
+        c = self.cube
+        #takes right side of left
+        t0, t1, t2 = c[9*4+2], c[9*4+5], c[9*4+8]
+        #modify right side of left to up side of down
+        c[9*4+2], c[9*4+5], c[9*4+8] = c[9*5], c[9*5+1], c[9*5+2]
+        #modify up side of down to left side of right
+        c[9*5], c[9*5+1], c[9*5+2] = c[9*2], c[9*2+1], c[9*2+2]
+        #modify left side of right to down side of up
+        c[9*2], c[9*2+1], c[9*2+2] = c[6], c[7],c[8]
+        #modify down side of up to right of left reversed
+        c[6], c[7],c[8] = t2,t1,t0
+        t0 = c[9*1]
+        c[9*1]=c[9*1+6]
+        c[9*1+6]=c[9*1+8]
+        c[9*1+8]=c[9*1+2]
+        c[9*1+2]=t0
+        t0=c[10]
+        c[10]=c[9+3]
+        c[12]=c[9*1+7]
+        c[16]=c[9+5]
+        c[14]=t0
+    
