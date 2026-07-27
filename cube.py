@@ -105,10 +105,10 @@ class cube:
         t0, t1, t2 = c[9*4+2], c[9*4+5], c[9*4+8]
         #modify right side of left to up side of down
         c[9*4+2], c[9*4+5], c[9*4+8] = c[9*5], c[9*5+1], c[9*5+2]
-        #modify up side of down to left side of right
-        c[9*5], c[9*5+1], c[9*5+2] = c[9*2], c[9*2+1], c[9*2+2]
+        #modify up side of down to left side of right (reversed)
+        c[9*5], c[9*5+1], c[9*5+2] = c[9*2+6], c[9*2+3], c[9*2]
         #modify left side of right to down side of up
-        c[9*2], c[9*2+1], c[9*2+2] = c[6], c[7],c[8]
+        c[9*2], c[9*2+3], c[9*2+6] = c[6], c[7],c[8]
         #modify down side of up to right of left reversed
         c[6], c[7],c[8] = t2,t1,t0
         t0 = c[9*1]
