@@ -121,4 +121,29 @@ class cube:
         c[12]=c[9*1+7]
         c[16]=c[9+5]
         c[14]=t0
-    
+    #down function counter clockwise
+    def D(self):
+        c = self.cube
+        #taking down row of front
+        t0, t1, t2 = c[9+6], c[9+7], c[9+8]
+        #down front change to down right
+        c[9+6], c[9+7], c[9+8]=c[9*2+6],c[9*2+7],c[9*2+8]
+        #down right to down back
+        c[9*2+6],c[9*2+7],c[9*2+8]=c[9*3+6],c[9*3+7],c[9*3+8]
+        #down back to down left
+        c[9*3+6],c[9*3+7],c[9*3+8]=c[9*4+6],c[9*4+7],c[9*4+8]
+        #down left changes to down front (reversed)
+        c[9*4+6],c[9*4+7],c[9*4+8] = t2,t1,t0
+        #down side
+        t0=c[9*5]
+        c[9*5]=c[45+2]
+        c[47]=c[53]
+        c[53]=c[51]
+        c[51]=t0
+        t0 = c[9*5+1]
+        c[46]=c[9*5+5]
+        c[9*5+5]=c[52]
+        c[52]=c[9*5+3]
+        c[48]=t0
+
+
