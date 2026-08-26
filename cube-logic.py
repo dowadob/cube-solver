@@ -1,16 +1,18 @@
 from cube import cube
+from copy import deepcopy
 
-os = []
-for i in range(6):
-    os += 9*[i]
-x = cube(os)
-print("before move:")
-for j in range(6):
-    print(f"face: {j}")
-    for i in range(9*j, 9*(j+1), 3):
-        print("".join([str(c) for c in x.cube[i:i+3]]))
-x.F()
-for j in range(6):
-    print(f"face: {j}")
-    for i in range(9*j, 9*(j+1), 3):
-        print("".join([str(c) for c in x.cube[i:i+3]]))
+state = [
+    
+]
+c = Cube
+print('---------'
+)
+print(b)
+print('------------')
+diffRep = [not a[i]==b[i] for i in range(54)]
+print(diffRep)
+print('--------')
+for i in range(54):
+    if a[i]!=b[i]:
+        print(f"自己算法 {i}", a[i])
+        print(f"ai 推測 {i}:", b[i])

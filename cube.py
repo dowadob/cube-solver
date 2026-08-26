@@ -74,8 +74,8 @@ class cube:
         c[24] = t[8]
         c[25] = t[5]
         c[26] = t[2]        
-    # move up to right
-    def U(self):
+    # move up to right 正確機制
+    def U_prime(self):
         c = self.cube
         #takes front top row
         t0, t1, t2 = c[9], c[10], c[11]
@@ -98,7 +98,7 @@ class cube:
         c[5]=c[7]
         c[7]=c[3]
         c[3]=t0
-    #move front clockwise
+    #move front clockwise 對
     def F(self):
         c = self.cube
         #takes right side of left
@@ -121,8 +121,8 @@ class cube:
         c[12]=c[9*1+7]
         c[16]=c[9+5]
         c[14]=t0
-    #down function counter clockwise
-    def D(self):
+    #down function counter clockwise 對
+    def D_prime(self):
         c = self.cube
         #taking down row of front
         t0, t1, t2 = c[9+6], c[9+7], c[9+8]
@@ -132,8 +132,8 @@ class cube:
         c[9*2+6],c[9*2+7],c[9*2+8]=c[9*3+6],c[9*3+7],c[9*3+8]
         #down back to down left
         c[9*3+6],c[9*3+7],c[9*3+8]=c[9*4+6],c[9*4+7],c[9*4+8]
-        #down left changes to down front (reversed)
-        c[9*4+6],c[9*4+7],c[9*4+8] = t2,t1,t0
+        #down left changes to down front
+        c[9*4+6],c[9*4+7],c[9*4+8] = t0, t1, t2
         #down side
         t0=c[9*5]
         c[9*5]=c[45+2]
@@ -145,5 +145,13 @@ class cube:
         c[9*5+5]=c[52]
         c[52]=c[9*5+3]
         c[48]=t0
-
+    # move back to right
+    def B_prime(self):
+        c = self.cube
+        #takes up face top
+        t0, t1, t2 = c[0],c[1],c[2]
+        #left 
+    #to check if the state is the solved state
+    def isSolved(self):
+        return self.cube == [i for i in range(6) for _ in range(9)]
 
