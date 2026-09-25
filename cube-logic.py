@@ -2,7 +2,7 @@ from cube import Cube
 from copy import deepcopy
 
 state = [
-    2, 0,0,3,0,0,3,2,3,
+    2,0,0,3,0,0,3,2,3,
     0,3,2,0,1,1,1,5,4,
     5,2,1,4,2,0,5,4,5,
     2,3,3,1,3,5,4,1,4,
@@ -17,9 +17,11 @@ while True:
     if current_state.isSolved():
         break
     explored.append(current_state)
-    frontier += current_state.get_possible_moves()
+    for state in current_state.get_possible_moves():
+        if state not in explored:
+            frontier.append(state)
     current_state = frontier[-1]
-    dfrontier.pop(-1)
+    frontier.pop(-1)
 
 n = current_state
 while True:
