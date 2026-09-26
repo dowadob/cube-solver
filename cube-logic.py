@@ -1,28 +1,26 @@
 from cube import Cube
 from copy import deepcopy
+from node import Node
 
-state = [
-    2,0,0,3,0,0,3,2,3,
-    0,3,2,0,1,1,1,5,4,
-    5,2,1,4,2,0,5,4,5,
-    2,3,3,1,3,5,4,1,4,
-    0,4,4,3,4,4,0,1,5,
-    2,2,3,5,5,5,1,2,1,
-]
+c = Cube([i for i in range(6) for _ in range(9)])
+c.state = c.B_prime()
+c.state = c.U()
+c.state = c.F()
+
 frontier, explored = [], []
 solution = []
-current_state = Cube(state)
+current_state = Node(c, None, None)
 
 while True:
-    if current_state.isSolved():
+    if current_state.state.isSolved():
         break
-    explored.append(current_state)
-    for state in current_state.get_possible_moves():
-        if state not in explored:
-            frontier.append(state)
+    explored.append(current_state.state.state)
+    for node in current_state.get_possible_moves():
+        if node.state.state not in explored:
+            frontier.append(node)
     current_state = frontier[-1]
+    print(current_state.move)
     frontier.pop(-1)
-
 n = current_state
 while True:
     if n.parent is None:

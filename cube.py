@@ -13,7 +13,7 @@ class Cube:
     """
     # move left to down
     def L(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         # simpan kolom kiri Up
         t0, t1, t2 = c[0], c[3], c[6]
 
@@ -43,7 +43,7 @@ class Cube:
         c[44] = t[2]
     # move right to up
     def R(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         # ---------- save Up right column ----------
         t0, t1, t2 = c[2], c[5], c[8]
 
@@ -75,7 +75,7 @@ class Cube:
         c[26] = t[2]        
     # move up to right 正確機制
     def U_prime(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         #takes front top row
         t0, t1, t2 = c[9], c[10], c[11]
         #modify the front up row
@@ -100,7 +100,7 @@ class Cube:
         return c
     #move front clockwise 對
     def F(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         #takes right side of left
         t0, t1, t2 = c[9*4+2], c[9*4+5], c[9*4+8]
         #modify right side of left to up side of down
@@ -124,7 +124,7 @@ class Cube:
         return c
     #down function counter clockwise 對
     def D_prime(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         #taking down row of front
         t0, t1, t2 = c[9+6], c[9+7], c[9+8]
         #down front change to down right
@@ -149,7 +149,7 @@ class Cube:
         return c
     # move back to right
     def B_prime(self):
-        c = deepcopy(self.cube)
+        c = deepcopy(self.state)
         #takes up face top
         t0, t1, t2 = c[0],c[1],c[2]
         c[0],c[1],c[2]= c[9*4],c[9*4+3],c[9*4+6]
@@ -170,17 +170,6 @@ class Cube:
         return c
     #to check if the state is the solved state
     def isSolved(self):
-        return self.cube == [i for i in range(6) for _ in range(9)]
-    def __init__(self, state, parent=None, move=None):
-        self.cube = state
-        self.parent = parent
-        self.move = move
-    def get_possible_moves(self):
-        return [
-            Cube(self.L(), self, 'L'), 
-            Cube(self.R(), self, 'R'), 
-            Cube(self.U_prime(), self, 'U\''), 
-            Cube(self.F(), self, 'F'), 
-            Cube(self.D_prime(), self, 'D\''), 
-            Cube(self.B_prime(), self, 'B\'')
-            ]
+        return self.state == [i for i in range(6) for _ in range(9)]
+    def __init__(self, state):
+        self.state = state
